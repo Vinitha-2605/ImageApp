@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<tr>
+    <td>
+       <form action ="{% url "filter" %}">
+	   {% csrf_token %}
+	   <label>Title</label>
+	   <input type ="text" name="Title">
+       <button>Search</button>
+    </td>
+    <td>
+        <label>Description</label>
+        <input type ="text" name="Description">
+        <button>Search</button>
+    </form>
+</tr>
+    <form action="{% url "search" %}" method="POST">
+        {% csrf_token %}
+        <select name = "Images" id="image">
+            <label>Category</label>
+            <option seleted="selected">Select Category</page>
+            {% for category in categorys %}
+            <option value="{{ category.id }}">{{ category.category }}</option>
+            {% endfor %}
+        </select>
+        <input type ="submit" value="Search">
+    </form>
+<br>
+
+<div class="row">
+	{% for image in images %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="{% url 'details' image.id %}" class="img-wrap"> <img src="{{ image.Images.url }}"> </a>
+			<figcaption class="info-wrap">
+				<div class="price mt-1"><p>Title:{{ image.Title }}</p></div>
+				<div class="price mt-1"><p>Description:{{ image.Description }}</p></div>
+			</figcaption>
+		</div>
+	</div> 
+	{% endfor %}
+</div>
+
+{% endblock %}

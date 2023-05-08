@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Image</h1>
+<a href = "/category">Add Category</a>
+
+<form enctype="multipart/form-data"
+method = "POST">
+    {% csrf_token %}
+{{ forms.as_p }}
+<button>Save</button>
+</form>
+
+<a href ="imageview">ViewImages</a>
+
+{% endblock %}

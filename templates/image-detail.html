@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+<h3 class="section-title">Image detail</h3>
+<div class="row">
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+		    <img src="{{ images.Images.url }}"> </a>
+			<figcaption class="info-wrap">
+				<p>Title:{{ images.Title }}</p>
+				<p>Description:{{ images.Description }}</p>
+				<p>Category: {{ images.Category }}</p>
+				<p>CreatedBy: {{ images.UserName }}</p>
+			</div> <!-- price-wrap.// -->
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+</div> <!-- row.// -->
+</div>
+<a href ="{% url "view" %}">Back To Image</a>
+
+{% endblock %}
