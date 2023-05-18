@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import ValidationError
 import PIL.Image
+import toml
 
 # Create your models here.
 
@@ -10,11 +11,13 @@ class Category(models.Model):
         return self.category
 
 def validate_image(image):
+         config = toml.load('./config.toml')      
          img = PIL.Image.open(image)
-         if img.size[0] > 1000:
-            raise ValidationError("Image dimensions must not exceed 1000x1000 pixels.")
+         width, height = img.size
+         if width > config['img_max_width'] or height > config['img_max_height']:
+            raise ValidationError(f"Image dimensions must not exceed {config['img_max_width']}*{config['img_max_width'] } pixels.")
      
-class Image(models.Model):
+class Image(models.Model): 
     Title = models.CharField(max_length=20)
     Description = models.CharField(max_length=50)
     Category = models.ForeignKey(Category, on_delete=models.CASCADE)

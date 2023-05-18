@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 import base64
+import logging
 
 from .forms import ImageForm, CategoryForm
 from .models import Image, Category
 
 # Create your views here.
+logging.basicConfig(level=logging.INFO)
 
 def upload(request):
     if (request.method == "POST"):
@@ -67,8 +69,8 @@ def imageview(request):
    for imagedata in image:
       if imagedata['Imagedata'] is not None:
        imagedata['Imagedata'] = base64.b64encode(imagedata['Imagedata']).decode('utf-8')
-       print( imagedata['Imagedata'])
       data.append(imagedata)
+      logging.info(data)
 
       return render(request, "searchimages.html",{
        "images": data,
