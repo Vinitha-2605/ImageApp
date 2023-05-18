@@ -1,13 +1,17 @@
 {% extends 'base.html '%}
 
 {% block content %}
+<div class ="toast-header">
     <h1>Login</h1>
+</div>
+<div class="container">
     <form method= "POST">
         {% csrf_token %}
     {{ loginDetails.as_p }}
     <p>Don't have a account? <a href ="register">Register</a>
     <button type="submit" class="save btn btn-default">Login</button> 
     </form>
+</div>
 </body>
 </html>
 {% endblock %}

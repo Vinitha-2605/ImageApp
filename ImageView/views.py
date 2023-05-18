@@ -1,27 +1,32 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.db.models import Q
+import base64
+
 from .forms import ImageForm, CategoryForm
 from .models import Image, Category
-from django.http import HttpResponse, HttpResponseRedirect
-from django.db.models import Q
 
 # Create your views here.
 
 def upload(request):
     if (request.method == "POST"):
         form = ImageForm(request.POST, request.FILES)
-
-        # searchimage(request)
-        
         if form.is_valid():
-           print( request.session['User'])
-           imagedetail = Image(Title= form.cleaned_data['Title'],
+          img =  request.FILES['Images']
+          with img.open() as image_file:
+           encoded_string = image_file.read()
+          imagedetail = Image(Title= form.cleaned_data['Title'],
                                Description = form.cleaned_data['Description'],
                                Category = form.cleaned_data['Category'],
-                               Images = form.cleaned_data['Images'],
+                               Imagedata= encoded_string, 
                                UserName = request.session['User'])
-           imagedetail.save()
-           return HttpResponse("Submitted Successfully")
-    else:   
+          imagedetail.save()
+          return HttpResponse("Submitted Successfully")
+        else:           
+            return render(request,  "image.html",{
+            "forms": form
+         })
+    else:  
      form = ImageForm()
      return render(request, "image.html",{
         "forms": form
@@ -49,19 +54,24 @@ def imagedetail(request, id):
 def searchimage(request):
    Title = request.GET
    Description = request.GET
-
    image = Image.objects.filter(Q(Title=Title['Title']) | 
-                                Q(Description=Description['Description']))
-                            
+                                Q(Description=Description['Description']))                       
    return render(request, "searchimages.html",{
       "images": image   
    })
 
 def imageview(request):
-     form = Category.objects.values()
-     image = Image.objects.all()
-     return render(request, "searchimages.html",{
-        "images": image,
+   form = Category.objects.values()
+   image = Image.objects.all().values()
+   data = list()
+   for imagedata in image:
+      if imagedata['Imagedata'] is not None:
+       imagedata['Imagedata'] = base64.b64encode(imagedata['Imagedata']).decode('utf-8')
+       print( imagedata['Imagedata'])
+      data.append(imagedata)
+
+      return render(request, "searchimages.html",{
+       "images": data,
         "categorys": form
     })
 
