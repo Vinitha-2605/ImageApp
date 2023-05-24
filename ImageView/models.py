@@ -13,9 +13,8 @@ class Category(models.Model):
 def validate_image(image):
          config = toml.load('./config.toml')      
          img = PIL.Image.open(image)
-         width, height = img.size
-         if width > config['img_max_width'] or height > config['img_max_height']:
-            raise ValidationError(f"Image dimensions must not exceed {config['img_max_width']}*{config['img_max_width'] } pixels.")
+         if img.size > config['img_size']:
+            raise ValidationError(config['img_size_error'])
      
 class Image(models.Model): 
     Title = models.CharField(max_length=20)
