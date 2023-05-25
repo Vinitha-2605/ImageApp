@@ -1,13 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Login
     </title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static "css/bootstrap.css" %}"">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static "css/bootstrap.css" %}">
     <script src='main.js'></script>
     {% block css %}
     {% endblock %}
@@ -15,7 +15,9 @@
 <body>
     {% block content %}
     {% endblock %}
-
+    
+<div class = "form-text">
     <form action = "/Logout">
         <button>Logout</button>
     </form>
+</div>

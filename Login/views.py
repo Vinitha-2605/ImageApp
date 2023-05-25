@@ -40,5 +40,5 @@ def signup(request):
         "RegisterDetails": form
     })
 
-def logout(request):
+def logout():
    return HttpResponseRedirect("/Login")

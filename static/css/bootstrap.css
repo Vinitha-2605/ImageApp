@@ -68,7 +68,7 @@ body {
   line-height: 1.5;
   color: #343a40;
   text-align: left;
-  background-color: #fff;
+  background-color: #17a2b8;
 }
 
 [tabindex="-1"]:focus {
@@ -84,7 +84,8 @@ hr {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  align-items: center
+  align-items: center;
+  text-align: center;
 }
 
 p {
@@ -230,6 +231,7 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.3rem;
+  color: blanchedalmond
 }
 
 button {
@@ -250,6 +252,7 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  text-align: center;
 }
 
 button,
@@ -549,9 +552,10 @@ pre code {
 .container {
   width: 100%;
   padding-right: 10px;
-  padding-left: 10px;
+  padding-left: 471px;
   margin-right: auto;
   margin-left: auto;
+  padding-top: 10px
 }
 @media (min-width: 576px) {
   .container {
@@ -5473,10 +5477,11 @@ a.close.disabled {
 }
 
 .toast-header {
-  display: flex;
+  display: block;
   align-items: center;
+  text-align: center;
   padding: 0.25rem 0.75rem;
-  color: #545454;
+  color: #5f89f0;
   background-color: rgba(255, 255, 255, 0.85);
   background-clip: padding-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);

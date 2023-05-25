@@ -19,6 +19,7 @@
     <form action="{% url "search" %}" method="POST">
         {% csrf_token %}
         <select name = "Images" id="image">
+            <div class = "dropdown-menu">
             <label>Category</label>
             <option seleted="selected">Select Category</page>
             {% for category in categorys %}
@@ -26,6 +27,7 @@
             {% endfor %}
         </select>
         <input type ="submit" value="Search">
+    </div>
     </form>
 <br>
 
@@ -33,7 +35,7 @@
 	{% for image in images %}
 	<div class="col-md-3">
 		<div class="card card-product-grid">
-			<a href="{% url 'details' image.id %}" class="img-wrap"> <img src="{{ image.Images.url }}"> </a>
+			<a href="{% url 'details' image.id %}" class="img-wrap">  <img src="data:image/jpg;base64,{{ image.Imagedata }}"> </a>
 			<figcaption class="info-wrap">
 				<div class="price mt-1"><p>Title:{{ image.Title }}</p></div>
 				<div class="price mt-1"><p>Description:{{ image.Description }}</p></div>
